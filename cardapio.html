@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="UPFOOD - Cardapio da cantina selecionada">
+  <meta name="theme-color" content="#1f2937">
+  <title>UPFOOD - Cardapio</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="page-wrapper">
+    <!-- Header -->
+    <header class="header">
+      <div class="container">
+        <div class="header__inner">
+          <div class="header__left">
+            <button class="header__back" onclick="voltarPagina()" aria-label="Voltar">
+              <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M15 18l-6-6 6-6"/>
+              </svg>
+              Voltar
+            </button>
+            <div>
+              <p class="header__title" id="cardapioNome">Cantina Central</p>
+            </div>
+          </div>
+          <div class="header__right">
+            <button class="btn btn-ghost" onclick="alert('Compartilhar disponivel em breve!')" style="color: rgba(255,255,255,0.7);">
+              🔗 Compartilhar
+            </button>
+            <div class="header__user" onclick="logout()" title="Clique para sair">
+              <div class="header__avatar" id="avatarCardapio">?</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+      <div class="container">
+        <div class="page-header__content">
+          <div class="page-header__info">
+            <div class="page-header__icon" style="background-color: var(--cor-primaria);">
+              <span aria-hidden="true">🍽️</span>
+            </div>
+            <div class="page-header__text">
+              <h1 id="estabNomeHeader">Cantina Central</h1>
+              <p id="estabNome">Bloco Vermelho - Universidade Positivo</p>
+            </div>
+          </div>
+          <div class="page-header__actions" style="gap: var(--espaco-2);">
+            <span class="badge badge-green">● Aberto</span>
+            <span class="badge badge-gray">⏱ 5-10 min</span>
+            <span class="badge badge-orange">⭐ 4.7</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <div class="container">
+        <div class="menu-layout">
+          <!-- Menu Content -->
+          <div class="menu-content">
+            <!-- Category Filters -->
+            <div class="category-filters" role="tablist" aria-label="Categorias do cardapio">
+              <button class="category-btn active" data-filtro="todos" role="tab" aria-selected="true">
+                Todos
+              </button>
+              <button class="category-btn" data-filtro="lanches" role="tab" aria-selected="false">
+                🥪 Lanches
+              </button>
+              <button class="category-btn" data-filtro="pratos" role="tab" aria-selected="false">
+                🍛 Pratos
+              </button>
+              <button class="category-btn" data-filtro="bebidas" role="tab" aria-selected="false">
+                🥤 Bebidas
+              </button>
+              <button class="category-btn" data-filtro="sobremesas" role="tab" aria-selected="false">
+                🍫 Sobremesas
+              </button>
+            </div>
+
+            <!-- Menu Grid -->
+            <div id="cardapioContainer" class="menu-grid" role="tabpanel" aria-label="Itens do cardapio">
+              <!-- Renderizado pelo script.js -->
+            </div>
+          </div>
+
+          <!-- Cart Sidebar -->
+          <aside class="cart-sidebar" id="cartSidebar">
+            <div class="cart-sidebar__header" onclick="toggleCart()">
+              <h2 class="cart-sidebar__title">
+                🛒 Carrinho
+                <span class="cart-sidebar__count" id="cartCount">0</span>
+              </h2>
+              <button class="btn btn-ghost btn-sm" aria-label="Expandir carrinho">
+                <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M6 9l6 6 6-6"/>
+                </svg>
+              </button>
+            </div>
+            
+            <div class="cart-sidebar__content" id="cartItems">
+              <div class="cart-empty">
+                <div class="cart-empty__icon" aria-hidden="true">🛒</div>
+                <p class="cart-empty__text">Seu carrinho esta vazio</p>
+              </div>
+            </div>
+            
+            <div class="cart-sidebar__footer">
+              <div class="cart-summary">
+                <div class="cart-summary__row">
+                  <span>Subtotal</span>
+                  <span id="cartSubtotal">R$ 0,00</span>
+                </div>
+                <div class="cart-summary__row">
+                  <span>Taxa de servico</span>
+                  <span>R$ 0,00</span>
+                </div>
+                <div class="cart-summary__row cart-summary__row--total">
+                  <span>Total</span>
+                  <span id="cartTotal">R$ 0,00</span>
+                </div>
+              </div>
+              <button class="btn btn-primary btn-full" id="btnFinalizarPedido" disabled onclick="irParaPagamento()">
+                Finalizar pedido
+              </button>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container">
+        <div class="footer__content">
+          <div class="footer__brand">
+            <div class="footer__logo">
+              <div class="footer__logo-icon" aria-hidden="true">🍔</div>
+              <span class="footer__logo-text">UP<span>FOOD</span></span>
+            </div>
+            <p class="footer__description">
+              Sistema de reserva de refeicoes da Universidade Positivo.
+            </p>
+          </div>
+          
+          <div class="footer__column">
+            <h4>Navegacao</h4>
+            <div class="footer__links">
+              <a href="home.html" class="footer__link">Inicio</a>
+              <a href="#" class="footer__link">Pedidos</a>
+              <a href="#" class="footer__link">Favoritos</a>
+            </div>
+          </div>
+          
+          <div class="footer__column">
+            <h4>Ajuda</h4>
+            <div class="footer__links">
+              <a href="#" class="footer__link">Suporte</a>
+              <a href="#" class="footer__link">FAQ</a>
+            </div>
+          </div>
+          
+          <div class="footer__column">
+            <h4>Legal</h4>
+            <div class="footer__links">
+              <a href="#" class="footer__link">Termos de Uso</a>
+              <a href="#" class="footer__link">Privacidade</a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="footer__bottom">
+          <p class="footer__copyright">
+            🍊 2024 Universidade Positivo - Campus Ecoville
+          </p>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Toast -->
+  <div id="toast" role="status" aria-live="polite"></div>
+
+  <script src="script.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const av = document.getElementById('avatarCardapio');
+      if (av && typeof Estado !== 'undefined' && Estado.usuario) {
+        av.textContent = iniciais(Estado.usuario.nome);
+      }
+    });
+
+    function toggleCart() {
+      const sidebar = document.getElementById('cartSidebar');
+      sidebar.classList.toggle('expanded');
+    }
+  </script>
+</body>
+</html>

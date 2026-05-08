@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="UPFOOD - Pedido confirmado com sucesso">
+  <meta name="theme-color" content="#1f2937">
+  <title>UPFOOD - Pedido Confirmado!</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="page-wrapper">
+    <!-- Header -->
+    <header class="header">
+      <div class="container">
+        <div class="header__inner">
+          <div class="header__left">
+            <a href="home.html" class="header__logo">
+              <div class="header__logo-icon" aria-hidden="true">🍔</div>
+              <span class="header__logo-text">UP<span>FOOD</span></span>
+            </a>
+          </div>
+          <div class="header__right">
+            <span class="header__title">Pedido Confirmado</span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="confirmation-section">
+      <div class="confirmation-card animate-fadeUp">
+        <!-- Success Icon -->
+        <div class="confirmation-card__icon" role="img" aria-label="Pedido confirmado com sucesso">
+          ✅
+        </div>
+
+        <h1 class="confirmation-card__title">Tudo certo!</h1>
+        <p class="confirmation-card__message">
+          Seu pedido foi reservado com sucesso. 
+          Retire no horario escolhido e pule a fila!
+        </p>
+
+        <!-- QR Code -->
+        <div class="confirmation-qr">
+          <div class="confirmation-qr__code" aria-label="QR Code do pedido">
+            📱
+          </div>
+          <p class="confirmation-qr__hint">
+            Mostre este codigo na cantina para retirar seu pedido
+          </p>
+        </div>
+
+        <!-- Order Number -->
+        <div style="margin-bottom: var(--espaco-6);">
+          <p style="font-size: 0.875rem; color: var(--cor-texto);">Numero do pedido</p>
+          <p style="font-family: var(--fonte-display); font-size: 2rem; font-weight: 800; color: var(--cor-primaria);" id="numPedido">#UP0000</p>
+        </div>
+
+        <!-- Timer -->
+        <div class="confirmation-timer" aria-live="polite">
+          <span class="confirmation-timer__icon" aria-hidden="true">⏱️</span>
+          <span class="confirmation-timer__text">Tempo ate a retirada:</span>
+          <span class="confirmation-timer__time" id="timerRetirada">--:--</span>
+        </div>
+
+        <!-- Details -->
+        <div class="confirmation-details">
+          <div class="confirmation-detail">
+            <span class="confirmation-detail__label">⏰ Horario de retirada</span>
+            <span class="confirmation-detail__value" id="horarioConfirm">--:--</span>
+          </div>
+          <div class="confirmation-detail">
+            <span class="confirmation-detail__label">📍 Local</span>
+            <span class="confirmation-detail__value" id="localConfirm">Cantina Central</span>
+          </div>
+          <div class="confirmation-detail">
+            <span class="confirmation-detail__label">💰 Total pago</span>
+            <span class="confirmation-detail__value" id="totalConfirm">R$ 0,00</span>
+          </div>
+          <div class="confirmation-detail">
+            <span class="confirmation-detail__label">💳 Pagamento</span>
+            <span class="confirmation-detail__value" id="pagamentoConfirm">Pix</span>
+          </div>
+        </div>
+
+        <!-- Actions -->
+        <div class="confirmation-actions">
+          <button class="btn btn-primary btn-lg" id="btnNovoPedido" onclick="window.location.href='home.html'">
+            🍽️ Fazer outro pedido
+          </button>
+          <button class="btn btn-secondary btn-lg" onclick="alert('Compartilhar disponivel em breve!')">
+            🔗 Compartilhar
+          </button>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container">
+        <div class="footer__bottom">
+          <p class="footer__copyright">
+            🍊 2024 Universidade Positivo - Campus Ecoville
+          </p>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Toast -->
+  <div id="toast" role="status" aria-live="polite"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>

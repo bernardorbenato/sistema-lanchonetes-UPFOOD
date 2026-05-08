@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="UPFOOD - Escolha seu bloco e faca seu pedido na Universidade Positivo">
+  <meta name="theme-color" content="#1f2937">
+  <title>UPFOOD - Inicio</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="page-wrapper">
+    <!-- Header -->
+    <header class="header">
+      <div class="container">
+        <div class="header__inner">
+          <div class="header__left">
+            <a href="home.html" class="header__logo">
+              <div class="header__logo-icon" aria-hidden="true">🍔</div>
+              <span class="header__logo-text">UP<span>FOOD</span></span>
+            </a>
+            <nav class="header__nav" aria-label="Navegacao principal">
+              <a href="home.html" class="header__nav-link active" aria-current="page">
+                <span>🏠</span> Inicio
+              </a>
+              <a href="#" class="header__nav-link" onclick="alert('Funcao disponivel em breve!')">
+                <span>📋</span> Pedidos
+              </a>
+              <a href="#" class="header__nav-link" onclick="alert('Funcao disponivel em breve!')">
+                <span>❤️</span> Favoritos
+              </a>
+            </nav>
+          </div>
+          <div class="header__right">
+            <button class="header__mobile-toggle" aria-label="Abrir menu">
+              <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M4 6h16M4 12h16M4 18h16"/>
+              </svg>
+            </button>
+            <div class="header__user" onclick="logout()" title="Clique para sair">
+              <div class="header__avatar" id="avatarUsuario">?</div>
+              <div class="header__user-info">
+                <span class="header__user-name" id="nomeUsuario">Estudante</span>
+                <span class="header__user-role">Aluno UP</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="container">
+        <div class="hero__content">
+          <div class="hero__text">
+            <p class="hero__greeting">Ola, bom dia 👋</p>
+            <h1 class="hero__title">
+              O que voce vai <span>comer</span> hoje?
+            </h1>
+            <p class="hero__description">
+              Escolha seu bloco, selecione a cantina e faca seu pedido. 
+              Retire sem fila no intervalo!
+            </p>
+            <div class="hero__search">
+              <input 
+                type="text" 
+                class="form-input" 
+                placeholder="Buscar lanche, cantina ou bloco..."
+                aria-label="Buscar"
+              >
+              <button class="btn btn-primary">Buscar</button>
+            </div>
+          </div>
+          <div class="hero__illustration">
+            <div class="hero__image">
+              <span class="hero__image-icon" aria-hidden="true">🍽️</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <div class="container">
+        <!-- Banner Intervalo -->
+        <div class="intervalo-banner animate-fadeUp">
+          <span class="intervalo-banner__icon" aria-hidden="true">⏱️</span>
+          <div class="intervalo-banner__content">
+            <h2 class="intervalo-banner__title">Proximo intervalo em 23 min</h2>
+            <p class="intervalo-banner__text">Reserve agora e retire sem fila! Seus colegas ja estao pedindo.</p>
+          </div>
+          <div class="intervalo-banner__action">
+            <button class="btn btn-secondary">Pedir agora</button>
+          </div>
+        </div>
+
+        <!-- Blocos Section -->
+        <section class="section" aria-labelledby="blocos-titulo">
+          <div class="section__header">
+            <h2 class="section__title" id="blocos-titulo">Escolha seu bloco</h2>
+            <a href="#" class="section__link">
+              Ver mapa
+              <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M9 5l7 7-7 7"/>
+              </svg>
+            </a>
+          </div>
+
+          <nav class="blocos-grid" aria-label="Blocos disponiveis">
+            <a href="#" class="bloco-card bloco-vermelho" data-bloco="vermelho">
+              <span class="bloco-card__icon" aria-hidden="true">🔴</span>
+              <span class="bloco-card__name">Bloco Vermelho</span>
+              <span class="bloco-card__count">3 cantinas</span>
+            </a>
+
+            <a href="#" class="bloco-card bloco-azul" data-bloco="azul">
+              <span class="bloco-card__icon" aria-hidden="true">🔵</span>
+              <span class="bloco-card__name">Bloco Azul</span>
+              <span class="bloco-card__count">2 cantinas</span>
+            </a>
+
+            <a href="#" class="bloco-card bloco-bege" data-bloco="bege">
+              <span class="bloco-card__icon" aria-hidden="true">🟤</span>
+              <span class="bloco-card__name">Bloco Bege</span>
+              <span class="bloco-card__count">4 cantinas</span>
+            </a>
+
+            <a href="#" class="bloco-card bloco-amarelo" data-bloco="amarelo">
+              <span class="bloco-card__icon" aria-hidden="true">🟡</span>
+              <span class="bloco-card__name">Bloco Amarelo</span>
+              <span class="bloco-card__count">3 cantina</span>
+            </a>
+
+            <a href="#" class="bloco-card bloco-marrom" data-bloco="marrom">
+              <span class="bloco-card__icon" aria-hidden="true">🟫</span>
+              <span class="bloco-card__name">Bloco Marrom</span>
+              <span class="bloco-card__count">4 cantinas</span>
+            </a>
+
+            <a href="#" class="bloco-card bloco-sul" data-bloco="sul">
+              <span class="bloco-card__icon" aria-hidden="true">🟢</span>
+              <span class="bloco-card__name">Bloco Sul</span>
+              <span class="bloco-card__count">2 cantinas</span>
+            </a>
+          </nav>
+        </section>
+
+        <!-- Pedidos Rapidos -->
+        <section class="section" aria-labelledby="pedidos-titulo">
+          <div class="section__header">
+            <h2 class="section__title" id="pedidos-titulo">Pedir novamente</h2>
+            <a href="#" class="section__link">
+              Ver historico
+              <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M9 5l7 7-7 7"/>
+              </svg>
+            </a>
+          </div>
+
+          <div class="pedidos-grid">
+            <article class="pedido-card">
+              <div class="pedido-card__image">
+                <span class="pedido-card__image-icon" aria-hidden="true">🧀</span>
+                <span class="pedido-card__badge badge badge-orange">Popular</span>
+              </div>
+              <div class="pedido-card__content">
+                <h3 class="pedido-card__name">Pao de Queijo</h3>
+                <p class="pedido-card__location">📍 Cantina Central - Bloco Vermelho</p>
+                <div class="pedido-card__footer">
+                  <span class="pedido-card__price">R$ 6,50</span>
+                  <span class="pedido-card__time">⏱️ 5 min</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="pedido-card">
+              <div class="pedido-card__image">
+                <span class="pedido-card__image-icon" aria-hidden="true">🍊</span>
+              </div>
+              <div class="pedido-card__content">
+                <h3 class="pedido-card__name">Suco de Laranja</h3>
+                <p class="pedido-card__location">📍 UP Cafe - Bloco Azul</p>
+                <div class="pedido-card__footer">
+                  <span class="pedido-card__price">R$ 7,00</span>
+                  <span class="pedido-card__time">⏱️ 3 min</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="pedido-card">
+              <div class="pedido-card__image">
+                <span class="pedido-card__image-icon" aria-hidden="true">🥗</span>
+                <span class="pedido-card__badge badge badge-green">Saudavel</span>
+              </div>
+              <div class="pedido-card__content">
+                <h3 class="pedido-card__name">Salada Caesar</h3>
+                <p class="pedido-card__location">📍 Restaurante UP - Bloco Bege</p>
+                <div class="pedido-card__footer">
+                  <span class="pedido-card__price">R$ 18,00</span>
+                  <span class="pedido-card__time">⏱️ 10 min</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="pedido-card">
+              <div class="pedido-card__image">
+                <span class="pedido-card__image-icon" aria-hidden="true">☕</span>
+              </div>
+              <div class="pedido-card__content">
+                <h3 class="pedido-card__name">Cafe com Leite</h3>
+                <p class="pedido-card__location">📍 UP Cafe - Bloco Sul</p>
+                <div class="pedido-card__footer">
+                  <span class="pedido-card__price">R$ 6,50</span>
+                  <span class="pedido-card__time">⏱️ 2 min</span>
+                </div>
+              </div>
+            </article>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container">
+        <div class="footer__content">
+          <div class="footer__brand">
+            <div class="footer__logo">
+              <div class="footer__logo-icon" aria-hidden="true">🍔</div>
+              <span class="footer__logo-text">UP<span>FOOD</span></span>
+            </div>
+            <p class="footer__description">
+              Sistema de reserva de refeicoes da Universidade Positivo. 
+              Peca seu lanche antes do intervalo e retire sem fila.
+            </p>
+          </div>
+          
+          <div class="footer__column">
+            <h4>Navegacao</h4>
+            <div class="footer__links">
+              <a href="home.html" class="footer__link">Inicio</a>
+              <a href="#" class="footer__link">Pedidos</a>
+              <a href="#" class="footer__link">Favoritos</a>
+              <a href="#" class="footer__link">Perfil</a>
+            </div>
+          </div>
+          
+          <div class="footer__column">
+            <h4>Blocos</h4>
+            <div class="footer__links">
+              <a href="#" class="footer__link">Bloco Vermelho</a>
+              <a href="#" class="footer__link">Bloco Azul</a>
+              <a href="#" class="footer__link">Bloco Bege</a>
+              <a href="#" class="footer__link">Bloco Sul</a>
+            </div>
+          </div>
+          
+          <div class="footer__column">
+            <h4>Ajuda</h4>
+            <div class="footer__links">
+              <a href="#" class="footer__link">Suporte</a>
+              <a href="#" class="footer__link">FAQ</a>
+              <a href="#" class="footer__link">Termos de Uso</a>
+              <a href="#" class="footer__link">Privacidade</a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="footer__bottom">
+          <p class="footer__copyright">
+            🍊 2024 Universidade Positivo - Campus Ecoville. Todos os direitos reservados.
+          </p>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Toast -->
+  <div id="toast" role="status" aria-live="polite"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>

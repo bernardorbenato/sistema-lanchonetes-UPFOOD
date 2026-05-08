@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="UPFOOD - Sistema de Reserva de Refeicoes da Universidade Positivo. Reserve seu lanche e retire sem fila.">
+  <meta name="theme-color" content="#1f2937">
+  <title>UPFOOD - Login</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="login-page">
+    <!-- Hero Section -->
+    <section class="login-hero" aria-label="Informacoes sobre o UPFOOD">
+      <div class="login-hero__content">
+        <div class="login-hero__logo">
+          <div class="login-hero__logo-icon" aria-hidden="true">🍔</div>
+          <span class="login-hero__logo-text">UP<span>FOOD</span></span>
+        </div>
+        
+        <h1 class="login-hero__title">
+          Reserve sua <em>refeição</em> e retire sem fila
+        </h1>
+        
+        <p class="login-hero__description">
+          O sistema oficial de reserva de refeicoes da Universidade Positivo. 
+          Peca seu lanche antes do intervalo e retire sem esperar.
+        </p>
+        
+        <div class="login-hero__features">
+          <div class="login-hero__feature">
+            <span class="login-hero__feature-icon" aria-hidden="true">⏱️</span>
+            <span>Economize tempo no intervalo</span>
+          </div>
+          <div class="login-hero__feature">
+            <span class="login-hero__feature-icon" aria-hidden="true">📱</span>
+            <span>Peca de qualquer lugar</span>
+          </div>
+          <div class="login-hero__feature">
+            <span class="login-hero__feature-icon" aria-hidden="true">🏷️</span>
+            <span>Precos exclusivos para alunos</span>
+          </div>
+          <div class="login-hero__feature">
+            <span class="login-hero__feature-icon" aria-hidden="true">✅</span>
+            <span>Pagamento rapido e seguro</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Form Section -->
+    <section class="login-form-section" aria-label="Formulario de login">
+      <div class="login-form-wrapper">
+        <header class="login-form__header">
+          <h2 class="login-form__title">Bem-vindo de volta</h2>
+          <p class="login-form__subtitle">Entre com seu email institucional para continuar</p>
+        </header>
+
+        <form class="login-form" id="formLogin" novalidate>
+          <div class="form-group">
+            <label class="form-label" for="campoEmail">Email institucional</label>
+            <div class="input-icon-wrap">
+              <span class="input-icon" aria-hidden="true">📧</span>
+              <input 
+                type="email" 
+                id="campoEmail" 
+                name="email"
+                class="form-input" 
+                placeholder="seu.nome@cs.up.edu.br"
+                required
+                autocomplete="email"
+                autocapitalize="none"
+                aria-describedby="emailHelp"
+              >
+            </div>
+            <span id="emailHelp" class="form-hint">Use seu email @up.edu.br</span>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="campoRGM">RGM (Registro Geral de Matricula)</label>
+            <div class="input-icon-wrap">
+              <span class="input-icon" aria-hidden="true">🎓</span>
+              <input 
+                type="text" 
+                id="campoRGM"
+                name="rgm" 
+                class="form-input" 
+                placeholder="Ex: 12345678"
+                required
+                autocomplete="off"
+                inputmode="numeric"
+                aria-describedby="rgmHelp"
+              >
+            </div>
+            <span id="rgmHelp" class="form-hint">Digite seu numero de matricula</span>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-lg btn-full mt-4">
+            Entrar
+          </button>
+
+          <div class="text-center mt-4">
+            <span class="text-muted">ou</span>
+          </div>
+
+          <button 
+            type="button" 
+            class="btn btn-secondary btn-full"
+            onclick="window.location.href='home.html'"
+          >
+            👀 Ver cardapio sem login
+          </button>
+        </form>
+
+        <footer class="login-form__footer">
+          <p>Problemas para acessar? <a href="#">Fale com o suporte</a></p>
+          <p class="mt-4" style="font-size: 0.8125rem;">
+            🍊 Universidade Positivo - Campus Ecoville
+          </p>
+        </footer>
+      </div>
+    </section>
+  </div>
+
+  <!-- Toast -->
+  <div id="toast" role="status" aria-live="polite"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>

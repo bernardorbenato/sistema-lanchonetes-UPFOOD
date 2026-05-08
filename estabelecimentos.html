@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="UPFOOD - Cantinas disponiveis no bloco selecionado">
+  <meta name="theme-color" content="#1f2937">
+  <title>UPFOOD - Estabelecimentos</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="page-wrapper">
+    <!-- Header -->
+    <header class="header">
+      <div class="container">
+        <div class="header__inner">
+          <div class="header__left">
+            <button class="header__back" onclick="voltarPagina()" aria-label="Voltar">
+              <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M15 18l-6-6 6-6"/>
+              </svg>
+              Voltar
+            </button>
+            <a href="home.html" class="header__logo">
+              <div class="header__logo-icon" aria-hidden="true">🍔</div>
+              <span class="header__logo-text">UP<span>FOOD</span></span>
+            </a>
+          </div>
+          <div class="header__right">
+            <button class="header__mobile-toggle" aria-label="Abrir menu">
+              <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M4 6h16M4 12h16M4 18h16"/>
+              </svg>
+            </button>
+            <div class="header__user" onclick="logout()" title="Clique para sair">
+              <div class="header__avatar" id="avatarEstab">?</div>
+              <div class="header__user-info">
+                <span class="header__user-name">Estudante</span>
+                <span class="header__user-role">Aluno UP</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+      <div class="container">
+        <div class="page-header__content">
+          <div class="page-header__info">
+            <div class="page-header__icon" id="blocoIcon" style="background-color: #ef4444;">
+              <span aria-hidden="true">🔴</span>
+            </div>
+            <div class="page-header__text">
+              <h1 id="blocoNome">Bloco Vermelho</h1>
+              <p id="blocoLabel">Voce esta no bloco vermelho - Escolha uma cantina</p>
+            </div>
+          </div>
+          <div class="page-header__actions">
+            <button class="btn btn-secondary">
+              <span>📍</span> Ver no mapa
+            </button>
+            <button class="btn btn-primary" onclick="window.location.href='home.html'">
+              <span>🔄</span> Trocar bloco
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <div class="container">
+        <section class="section" aria-labelledby="cantinas-titulo">
+          <div class="section__header">
+            <h2 class="section__title" id="cantinas-titulo">Cantinas disponiveis</h2>
+            <span class="badge badge-green">● Abertas agora</span>
+          </div>
+
+          <!-- Lista de estabelecimentos renderizada pelo JS -->
+          <div id="listaEstabs" class="establishments-grid" role="list" aria-label="Lista de cantinas"></div>
+        </section>
+
+        <!-- Info Card -->
+        <div class="card mt-8" style="display: flex; align-items: center; gap: var(--espaco-5); padding: var(--espaco-6);">
+          <div style="font-size: 2.5rem;">⏰</div>
+          <div>
+            <h3 style="font-size: 1rem; margin-bottom: var(--espaco-1);">Horario de funcionamento</h3>
+            <p style="color: var(--cor-texto);">Segunda a Sexta - 07h00 as 18h00</p>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container">
+        <div class="footer__content">
+          <div class="footer__brand">
+            <div class="footer__logo">
+              <div class="footer__logo-icon" aria-hidden="true">🍔</div>
+              <span class="footer__logo-text">UP<span>FOOD</span></span>
+            </div>
+            <p class="footer__description">
+              Sistema de reserva de refeicoes da Universidade Positivo.
+            </p>
+          </div>
+          
+          <div class="footer__column">
+            <h4>Navegacao</h4>
+            <div class="footer__links">
+              <a href="home.html" class="footer__link">Inicio</a>
+              <a href="#" class="footer__link">Pedidos</a>
+              <a href="#" class="footer__link">Favoritos</a>
+            </div>
+          </div>
+          
+          <div class="footer__column">
+            <h4>Ajuda</h4>
+            <div class="footer__links">
+              <a href="#" class="footer__link">Suporte</a>
+              <a href="#" class="footer__link">FAQ</a>
+            </div>
+          </div>
+          
+          <div class="footer__column">
+            <h4>Legal</h4>
+            <div class="footer__links">
+              <a href="#" class="footer__link">Termos de Uso</a>
+              <a href="#" class="footer__link">Privacidade</a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="footer__bottom">
+          <p class="footer__copyright">
+            🍊 2024 Universidade Positivo - Campus Ecoville
+          </p>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Toast -->
+  <div id="toast" role="status" aria-live="polite"></div>
+
+  <script src="script.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const av = document.getElementById('avatarEstab');
+      if (av && typeof Estado !== 'undefined' && Estado.usuario) {
+        av.textContent = iniciais(Estado.usuario.nome);
+      }
+    });
+  </script>
+</body>
+</html>
