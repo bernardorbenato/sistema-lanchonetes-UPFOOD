@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Pedidos — UPFOOD Admin</title>
+  <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+
+<button class="sidebar-toggle" id="sidebar-toggle">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+</button>
+<div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+<div class="admin-shell">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-logo">
+      <div class="sidebar-logo-mark">UP</div>
+      <div class="sidebar-logo-text">UP<span>FOOD</span></div>
+      <span class="sidebar-badge">Admin</span>
+    </div>
+    <nav class="sidebar-nav">
+      <div class="nav-section">
+        <div class="nav-section-label">Principal</div>
+        <a href="admin-dashboard.html" class="nav-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+          Dashboard
+        </a>
+        <a href="admin-pedidos.html" class="nav-item active">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="2"/></svg>
+          Pedidos
+        </a>
+        <a href="admin-produtos.html" class="nav-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg>
+          Estoque
+        </a>
+        <a href="admin-clientes.html" class="nav-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+          Clientes
+        </a>
+        <a href="admin-relatorios.html" class="nav-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+          Relatórios
+        </a>
+      </div>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="sidebar-store-info">
+        <div class="store-avatar">🍔</div>
+        <div>
+          <div class="store-name">Cantina Central</div>
+          <div class="store-block">Bloco Vermelho</div>
+        </div>
+      </div>
+      <a href="/" class="nav-item danger" style="margin-top:8px">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+        Sair do Admin
+      </a>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <div class="main-area">
+    <header class="admin-header">
+      <div class="header-left">
+        <h1>Gestão de Pedidos</h1>
+        <p>Acompanhe e gerencie todos os pedidos em tempo real</p>
+      </div>
+      <div class="header-right">
+        <span id="live-clock" class="header-time">--:--:--</span>
+        <div class="status-badge open"><div class="status-dot"></div> Aberto</div>
+        <div class="header-avatar">A</div>
+      </div>
+    </header>
+
+    <div class="page-content">
+
+      <!-- MINI STATS -->
+      <div class="cards-grid" style="margin-bottom:20px">
+        <div class="stat-card">
+          <div class="stat-card-header">
+            <span class="stat-label">Pendentes</span>
+            <div class="stat-icon yellow">⏳</div>
+          </div>
+          <div class="stat-value" id="count-pending">0</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card-header">
+            <span class="stat-label">Em Preparo</span>
+            <div class="stat-icon blue">🍳</div>
+          </div>
+          <div class="stat-value" id="count-prep">0</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card-header">
+            <span class="stat-label">Prontos</span>
+            <div class="stat-icon orange">🔔</div>
+          </div>
+          <div class="stat-value" id="count-ready">0</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card-header">
+            <span class="stat-label">Finalizados</span>
+            <div class="stat-icon green">✅</div>
+          </div>
+          <div class="stat-value" id="count-done">0</div>
+        </div>
+      </div>
+
+      <!-- TOOLBAR -->
+      <div class="toolbar">
+        <div class="search-wrap">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <input id="order-search" type="search" placeholder="Buscar por aluno, pedido...">
+        </div>
+        <select class="filter-select" id="block-filter">
+          <option value="all">Todos os blocos</option>
+          <option>Vermelho</option>
+          <option>Azul</option>
+          <option>Bege</option>
+          <option>Amarelo</option>
+          <option>Marrom</option>
+          <option>Sul</option>
+        </select>
+      </div>
+
+      <!-- TABS -->
+      <div class="tabs">
+        <button class="tab active" data-tab="pending">
+          ⏳ Pendentes <span class="count">0</span>
+        </button>
+        <button class="tab" data-tab="prep">
+          🍳 Em Preparo <span class="count">0</span>
+        </button>
+        <button class="tab" data-tab="ready">
+          🔔 Prontos <span class="count">0</span>
+        </button>
+        <button class="tab" data-tab="done">
+          ✅ Finalizados <span class="count">0</span>
+        </button>
+      </div>
+
+      <!-- BOARD -->
+      <div class="orders-board" id="orders-board"></div>
+
+      <div class="empty-state hidden" id="orders-empty">
+        <div class="empty-state-icon">📭</div>
+        <h4>Nenhum pedido nesta categoria</h4>
+        <p>Os pedidos aparecerão aqui automaticamente</p>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div id="toast-container"></div>
+
+<script src="js/admin.js"></script>
+<script src="js/admin-orders.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const orders = DB.get('orders') || [];
+    const counts = { pending:0, prep:0, ready:0, done:0 };
+    orders.forEach(o => { if(counts[o.status] !== undefined) counts[o.status]++; });
+    document.getElementById('count-pending').textContent = counts.pending;
+    document.getElementById('count-prep').textContent    = counts.prep;
+    document.getElementById('count-ready').textContent   = counts.ready;
+    document.getElementById('count-done').textContent    = counts.done;
+  });
+</script>
+</body>
+</html>
