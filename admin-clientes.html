@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Clientes — UPFOOD Admin</title>
+  <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+
+<button class="sidebar-toggle" id="sidebar-toggle">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+</button>
+<div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+<div class="admin-shell">
+
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-logo">
+      <div class="sidebar-logo-mark">UP</div>
+      <div class="sidebar-logo-text">UP<span>FOOD</span></div>
+      <span class="sidebar-badge">Admin</span>
+    </div>
+    <nav class="sidebar-nav">
+      <div class="nav-section">
+        <div class="nav-section-label">Principal</div>
+        <a href="admin-dashboard.html" class="nav-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+          Dashboard
+        </a>
+        <a href="admin-pedidos.html" class="nav-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="2"/></svg>
+          Pedidos
+        </a>
+        <a href="admin-produtos.html" class="nav-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg>
+          Estoque
+        </a>
+        <a href="admin-clientes.html" class="nav-item active">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+          Clientes
+        </a>
+        <a href="admin-relatorios.html" class="nav-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+          Relatórios
+        </a>
+      </div>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="sidebar-store-info">
+        <div class="store-avatar">🍔</div>
+        <div>
+          <div class="store-name">Cantina Central</div>
+          <div class="store-block">Bloco Vermelho</div>
+        </div>
+      </div>
+      <a href="/" class="nav-item danger" style="margin-top:8px">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+        Sair do Admin
+      </a>
+    </div>
+  </aside>
+
+  <div class="main-area">
+    <header class="admin-header">
+      <div class="header-left">
+        <h1>Base de Clientes</h1>
+        <p>Alunos cadastrados e histórico de consumo</p>
+      </div>
+      <div class="header-right">
+        <span id="live-clock" class="header-time">--:--:--</span>
+        <div class="status-badge open"><div class="status-dot"></div> Aberto</div>
+        <div class="header-avatar">A</div>
+      </div>
+    </header>
+
+    <div class="page-content">
+
+      <!-- STAT CARDS -->
+      <div class="cards-grid" style="margin-bottom:20px">
+        <div class="stat-card">
+          <div class="stat-card-header">
+            <span class="stat-label">Total de Alunos</span>
+            <div class="stat-icon orange">👥</div>
+          </div>
+          <div class="stat-value" id="cl-total">0</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card-header">
+            <span class="stat-label">Ativos</span>
+            <div class="stat-icon green">✅</div>
+          </div>
+          <div class="stat-value" id="cl-active">0</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card-header">
+            <span class="stat-label">Frequentes ⭐</span>
+            <div class="stat-icon purple">⭐</div>
+          </div>
+          <div class="stat-value" id="cl-vip">0</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card-header">
+            <span class="stat-label">Gasto Médio</span>
+            <div class="stat-icon blue">💳</div>
+          </div>
+          <div class="stat-value" style="font-size:20px" id="cl-avg">R$ 0</div>
+        </div>
+      </div>
+
+      <!-- TOOLBAR -->
+      <div class="toolbar">
+        <div class="search-wrap">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <input id="client-search" type="search" placeholder="Buscar por nome ou email...">
+        </div>
+        <select class="filter-select" id="client-filter">
+          <option value="all">Todos</option>
+          <option value="active">Ativos</option>
+          <option value="inactive">Inativos</option>
+          <option value="vip">Frequentes ⭐</option>
+        </select>
+      </div>
+
+      <!-- TABLE -->
+      <div class="card">
+        <div class="card-body no-pad">
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Aluno</th>
+                  <th>RGM</th>
+                  <th>Email Institucional</th>
+                  <th>Pedidos</th>
+                  <th>Total Gasto</th>
+                  <th>Último Pedido</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody id="clients-tbody"></tbody>
+            </table>
+          </div>
+          <div class="empty-state hidden" id="clients-empty">
+            <div class="empty-state-icon">👥</div>
+            <h4>Nenhum cliente encontrado</h4>
+            <p>Tente ajustar o filtro</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div id="toast-container"></div>
+
+<script src="js/admin.js"></script>
+<script>
+  let allClients = [];
+  let searchQ = '';
+  let filterStatus = 'all';
+
+  function renderClients() {
+    const tbody = document.getElementById('clients-tbody');
+    const empty = document.getElementById('clients-empty');
+    let clients = [...allClients];
+
+    if (searchQ) {
+      const q = searchQ.toLowerCase();
+      clients = clients.filter(c => c.name.toLowerCase().includes(q) || c.email.toLowerCase().includes(q) || c.rgm.includes(q));
+    }
+
+    if (filterStatus === 'active')   clients = clients.filter(c => c.status === 'active');
+    if (filterStatus === 'inactive') clients = clients.filter(c => c.status === 'inactive');
+    if (filterStatus === 'vip')      clients = clients.filter(c => c.vip);
+
+    if (clients.length === 0) {
+      tbody.innerHTML = '';
+      empty.classList.remove('hidden');
+      return;
+    }
+
+    empty.classList.add('hidden');
+    tbody.innerHTML = clients.map(c => `
+      <tr>
+        <td>
+          <div style="display:flex;align-items:center;gap:10px">
+            <div style="width:36px;height:36px;border-radius:50%;background:var(--orange-soft);display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--orange);font-size:14px;flex-shrink:0">
+              ${c.name[0]}
+            </div>
+            <div>
+              <div class="td-main">${c.name} ${c.vip ? '⭐' : ''}</div>
+              <div class="td-sub">${c.orderCount} pedido${c.orderCount!==1?'s':''}</div>
+            </div>
+          </div>
+        </td>
+        <td class="td-mono">${c.rgm}</td>
+        <td>${c.email}</td>
+        <td style="font-weight:700">${c.orderCount}</td>
+        <td class="fw-bold text-orange">${formatBRL(c.totalSpent)}</td>
+        <td class="text-muted">${timeAgo(c.lastOrder)}</td>
+        <td>
+          <span class="pill ${c.status === 'active' ? 'active' : 'inactive'}">
+            ${c.status === 'active' ? 'Ativo' : 'Inativo'}
+          </span>
+          ${c.vip ? '<span class="pill vip" style="margin-left:4px">Frequente</span>' : ''}
+        </td>
+      </tr>
+    `).join('');
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    allClients = DB.get('clients') || [];
+
+    const active = allClients.filter(c => c.status === 'active').length;
+    const vip    = allClients.filter(c => c.vip).length;
+    const avg    = allClients.length ? allClients.reduce((s,c) => s + c.totalSpent, 0) / allClients.length : 0;
+
+    document.getElementById('cl-total').textContent  = allClients.length;
+    document.getElementById('cl-active').textContent = active;
+    document.getElementById('cl-vip').textContent    = vip;
+    document.getElementById('cl-avg').textContent    = formatBRL(avg);
+
+    renderClients();
+
+    document.getElementById('client-search').addEventListener('input', e => {
+      searchQ = e.target.value.trim();
+      renderClients();
+    });
+
+    document.getElementById('client-filter').addEventListener('change', e => {
+      filterStatus = e.target.value;
+      renderClients();
+    });
+  });
+</script>
+</body>
+</html>

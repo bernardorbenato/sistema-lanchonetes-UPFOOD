@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Estoque — UPFOOD Admin</title>
+  <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+
+<button class="sidebar-toggle" id="sidebar-toggle">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+</button>
+<div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+<div class="admin-shell">
+
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-logo">
+      <div class="sidebar-logo-mark">UP</div>
+      <div class="sidebar-logo-text">UP<span>FOOD</span></div>
+      <span class="sidebar-badge">Admin</span>
+    </div>
+    <nav class="sidebar-nav">
+      <div class="nav-section">
+        <div class="nav-section-label">Principal</div>
+        <a href="admin-dashboard.html" class="nav-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+          Dashboard
+        </a>
+        <a href="admin-pedidos.html" class="nav-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="2"/></svg>
+          Pedidos
+        </a>
+        <a href="admin-produtos.html" class="nav-item active">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg>
+          Estoque
+        </a>
+        <a href="admin-clientes.html" class="nav-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+          Clientes
+        </a>
+        <a href="admin-relatorios.html" class="nav-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+          Relatórios
+        </a>
+      </div>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="sidebar-store-info">
+        <div class="store-avatar">🍔</div>
+        <div>
+          <div class="store-name">Cantina Central</div>
+          <div class="store-block">Bloco Vermelho</div>
+        </div>
+      </div>
+      <a href="/" class="nav-item danger" style="margin-top:8px">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+        Sair do Admin
+      </a>
+    </div>
+  </aside>
+
+  <div class="main-area">
+    <header class="admin-header">
+      <div class="header-left">
+        <h1>Estoque de Produtos</h1>
+        <p id="stock-summary">carregando...</p>
+      </div>
+      <div class="header-right">
+        <span id="live-clock" class="header-time">--:--:--</span>
+        <div class="status-badge open"><div class="status-dot"></div> Aberto</div>
+        <div class="header-avatar">A</div>
+      </div>
+    </header>
+
+    <div class="page-content">
+
+      <!-- STOCK CARDS -->
+      <div class="cards-grid" style="margin-bottom:20px">
+        <div class="stat-card">
+          <div class="stat-card-header">
+            <span class="stat-label">Total de Produtos</span>
+            <div class="stat-icon orange">📦</div>
+          </div>
+          <div class="stat-value" id="sc-total">0</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card-header">
+            <span class="stat-label">Sem Estoque</span>
+            <div class="stat-icon red">❌</div>
+          </div>
+          <div class="stat-value" id="sc-out">0</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card-header">
+            <span class="stat-label">Estoque Baixo</span>
+            <div class="stat-icon yellow">⚠️</div>
+          </div>
+          <div class="stat-value" id="sc-low">0</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card-header">
+            <span class="stat-label">Valor em Estoque</span>
+            <div class="stat-icon green">💰</div>
+          </div>
+          <div class="stat-value" style="font-size:18px" id="sc-value">R$ 0</div>
+        </div>
+      </div>
+
+      <!-- TOOLBAR -->
+      <div class="toolbar">
+        <div class="search-wrap">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <input id="product-search" type="search" placeholder="Buscar produto...">
+        </div>
+        <select class="filter-select" id="cat-filter">
+          <option value="all">Todas as categorias</option>
+          <option>Lanches</option>
+          <option>Bebidas</option>
+          <option>Salgados</option>
+          <option>Refeições</option>
+          <option>Doces</option>
+          <option>Açaí</option>
+        </select>
+        <button class="btn btn-primary" onclick="openNewProduct()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          Novo Produto
+        </button>
+      </div>
+
+      <!-- TABLE -->
+      <div class="card">
+        <div class="card-body no-pad">
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Produto</th>
+                  <th>Categoria</th>
+                  <th>Estoque</th>
+                  <th>Preço</th>
+                  <th>Ações</th>
+                </tr>
+              </thead>
+              <tbody id="products-tbody"></tbody>
+            </table>
+          </div>
+          <div class="empty-state hidden" id="products-empty">
+            <div class="empty-state-icon">📦</div>
+            <h4>Nenhum produto encontrado</h4>
+            <p>Adicione produtos ao cardápio</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- PRODUCT MODAL -->
+<div class="modal-overlay" id="product-modal">
+  <div class="modal">
+    <div class="modal-header">
+      <h3 class="modal-title" id="modal-title">Novo Produto</h3>
+      <button class="modal-close" onclick="closeModal('product-modal')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form id="product-form">
+        <div class="form-group">
+          <label>Nome do Produto *</label>
+          <input type="text" id="prod-name" placeholder="Ex: X-Burger Clássico" required>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Categoria *</label>
+            <select id="prod-category" required>
+              <option value="">Selecione...</option>
+              <option>Lanches</option>
+              <option>Bebidas</option>
+              <option>Salgados</option>
+              <option>Refeições</option>
+              <option>Doces</option>
+              <option>Açaí</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Preço (R$) *</label>
+            <input type="number" id="prod-price" placeholder="0.00" min="0" step="0.01" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Quantidade em Estoque *</label>
+          <input type="number" id="prod-stock" placeholder="0" min="0" required>
+        </div>
+        <div class="form-group">
+          <label>URL da Imagem</label>
+          <input type="url" id="prod-image" placeholder="https://...">
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-ghost" onclick="closeModal('product-modal')">Cancelar</button>
+      <button class="btn btn-primary" onclick="saveProduct()">💾 Salvar Produto</button>
+    </div>
+  </div>
+</div>
+
+<div id="toast-container"></div>
+
+<script src="js/admin.js"></script>
+<script src="js/admin-products.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const products = DB.get('products') || [];
+    const out  = products.filter(p => p.stock === 0).length;
+    const low  = products.filter(p => p.stock > 0 && p.stock <= 5).length;
+    const val  = products.reduce((s, p) => s + p.price * p.stock, 0);
+
+    document.getElementById('sc-total').textContent = products.length;
+    document.getElementById('sc-out').textContent   = out;
+    document.getElementById('sc-low').textContent   = low;
+    document.getElementById('sc-value').textContent = formatBRL(val);
+  });
+</script>
+</body>
+</html>
